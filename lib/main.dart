@@ -9,10 +9,8 @@ Future<Album> fetchAlbum() async {
   );
 
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response, then parse the JSON.
     return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
   } else {
-    // If the server did not return a 200 OK response, then throw an exception.
     throw Exception('Failed to load album');
   }
 }
@@ -54,7 +52,6 @@ class Album {
   }
 }
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -92,8 +89,6 @@ class _MyAppState extends State<MyApp> {
           child: FutureBuilder<Album>(
             future: _futureAlbum,
             builder: (context, snapshot) {
-              // If the connection is done,
-              // check for response data or an error.
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
                   return Column(
@@ -116,7 +111,6 @@ class _MyAppState extends State<MyApp> {
                 }
               }
 
-              // By default, show a loading spinner.
               return const CircularProgressIndicator();
             },
           ),
